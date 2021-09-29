@@ -1,12 +1,18 @@
 const express = require("express");
+const path = require("path");
 const app = express();
+const port = 3000;
+
+app.set("view engine", "ejs");
+
+app.use(express.static(path.join(__dirname, "public")));
 
 app.get("/", function (req, res){
-    res.send("hello Blumer");
+    res.render("index", { titulo: "Olá, fica tranquilo, você está evoluindo!"});
 });
 
-app.get("/teste", function (req, res){
-    res.send("esse é um teste");
+app.get("/pagina", function (req, res){
+    res.render("pagina");
 });
 
 app.get("/teste2", function (req, res){
@@ -17,4 +23,6 @@ app.get("/teste2", function (req, res){
 // app.put
 // app.delete
 
-app.listen(3000);
+app.listen(port, () => 
+console.log(`Servidor rodando em http://localhost:${port}`)
+);
